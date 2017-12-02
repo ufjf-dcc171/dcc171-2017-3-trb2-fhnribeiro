@@ -1,38 +1,31 @@
 ## Fabio Henrique Neves Reis Ribeiro - 201135013 -Ciência da computação
-## Cenário
-Restaurante ou bar que seja possível ter mais de uma pedido aberto, por mesa. Sendo que o pedido pode ser editado enquanto estiver aberto, após o mesmo ser fechado, não é possivel sua edição.
-## Modelo de dados
-Foram utilizados 3 classes principais
-  * Mesa
-    * Lista de pedidos
-    * descricao
-  * Pedido
-    * id
-    * Lista de produtos
-    * dataInicio
-    * dataFinal
-    * status
-  * Produto
-    * id
-    * nome
-    * descricao
-    * preco
-## Campos necessários para a construção das telas
-  O sistema possui 3 telas
-  * Mesas
-    * Possui 4 botões novo pedido, remover pedido, editar pedido e fechar pedido.<br/>
-    Além disso possui duas lista, uma lista de mesas e uma de pedidos, a lista de pedidos é preenchida após a seleção de uma mesa. Ambos possuem um list model próprio.
-  * Pedido
-    * Possui duas listas uma com todos os produtos ofertados pelo estabelecimento e outro com os produtos adicionados no pedido.<br>
-    Possui dois botões adicionar e remover.
-  * Nota Fiscal
-    * Possui uma tabela com todos os items do pedido, o valor total do pedido.<br/>Possui dois labels com a data de abertura e do fechamento do pedido.
-## Pontos importantes do funcionamento da interface
-  Os botões de edição, fechamento e remoção do pedido só são habilitados após a seleção do mesmo na lista de pedidos.<br/>
-  Se o pedido já estiver fechado, somento o botão de visualizar pedido é habilitado.
-## Pontos de maior dificuldade de implementação
-  O mais complicado da implementação do sistema, é realizar o controle das múltiplas janelas, para que a edição em uma janela não interfira na outra.
+
+## Modelo de persistência 
+
+Foram utilizados 4 arquivos para guardar os dados, os dados foram separados utilizando uma tabulação.
+
+As datas foram guardadas em milissegundos.
+
+Os campos boolean foram guardados na forma de 0 ou 1.
+
+  * Mesas(mesas.txt)
+    * ID
+    * Descricao
+  * Produtos(produtos.txt)
+    * ID
+    * Descrição
+    * Preço
+  * Pedidos(pedidos.txt)
+    * ID da Mesa
+    * ID do pedido
+    * Data do pedido
+    * Data de fechamento(se possuir)
+    * Status do pedido
+  * Produtos do pedido(produtosPedido.txt)
+    * ID da Mesa
+    * ID do pedido
+    * ID do produto
 ## Melhorias futuras
-  * Persistência de dados.
-  * Ser possível editar multiplos pedidos ao mesmo tempo.
-  * Melhorias visuais.
+É necessário fazer otimizações no sistema, no carregamento do arquivo, mudando o estilo das listas utilizando um hash, para evitar de varrer a lista, quando for adicionar um produto em um pedido.
+
+Melhorar a maneira como os dados são salvos, por a cada edição o arquivo é rescrito.
