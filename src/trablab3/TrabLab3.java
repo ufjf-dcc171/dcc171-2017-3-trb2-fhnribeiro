@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,8 +36,10 @@ public class TrabLab3 {
     
     private static List<Mesa> getSampleMesa() {
         List<Mesa> mesas = new ArrayList<Mesa>();
+        
+        BufferedReader bufferMesas= null;
+        
         try {
-            BufferedReader bufferMesas= null;
             
             bufferMesas = new BufferedReader(new FileReader("mesas.txt"));
             
@@ -53,8 +56,19 @@ public class TrabLab3 {
             }
             
         } catch (IOException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro na abertura do arquivo:\n"+ex.getMessage(),"Arquivo não encontrado",JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }finally {
+ 
+            try {
+                bufferMesas.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+            }
+            
+            
             
         }
         return mesas;
@@ -64,10 +78,9 @@ public class TrabLab3 {
         
         List<Produto> produtos = new ArrayList<Produto>();
         
+        BufferedReader bufferProdutos= null;
+        
         try {
-            
-            
-            BufferedReader bufferProdutos= null;
             
             bufferProdutos = new BufferedReader(new FileReader("produtos.txt"));
             
@@ -83,8 +96,21 @@ public class TrabLab3 {
 
             }
             
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na abertura do arquivo:\n"+ex.getMessage(),"Arquivo não encontrado",JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+ 
+            try {
+                bufferProdutos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+                
+            }
+            
+            
+            
         }
         return produtos;
     }

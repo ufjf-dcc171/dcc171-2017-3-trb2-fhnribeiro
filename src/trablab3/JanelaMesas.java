@@ -252,22 +252,30 @@ public class JanelaMesas extends JFrame{
                     line = bufferProdutos.readLine();
                 
                 }
-                
-                
-                
+            
             } finally {
                 
                 bufferPedido.close();
                 bufferProdutos.close();
                 
             }
+            
         } catch (Exception ex) {
+            try {
+                new Formatter("pedidos.txt");
+            } catch (FileNotFoundException ex1) {
+                Logger.getLogger(JanelaMesas.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            JOptionPane.showMessageDialog(null, "Erro na abertura do arquivo:\n"+ex.getMessage()+"\n Foi criado um novo arquivo.","Arquivo não encontrado",JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(JanelaMesas.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
         } finally {
             try {
                 bufferPedido.close();
                 bufferProdutos.close();
             } catch (IOException ex) {
+                
                 Logger.getLogger(JanelaMesas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
