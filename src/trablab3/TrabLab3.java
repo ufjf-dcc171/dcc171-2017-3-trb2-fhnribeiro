@@ -5,8 +5,15 @@
  */
 package trablab3;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -27,25 +34,58 @@ public class TrabLab3 {
     }
     
     private static List<Mesa> getSampleMesa() {
-        List<Mesa> mesas = new ArrayList<Mesa>() {
-            {
-                add(new Mesa("Mesa 1"));
-                add(new Mesa("Mesa 2"));
-                add(new Mesa("Mesa 3"));
+        List<Mesa> mesas = new ArrayList<Mesa>();
+        try {
+            BufferedReader bufferMesas= null;
+            
+            bufferMesas = new BufferedReader(new FileReader("mesas.txt"));
+            
+            String line = bufferMesas.readLine();
+            
+            while (line != null) {
+                
+                String[] dados = line.split("\t");
+                
+                mesas.add(new Mesa(Integer.parseInt(dados[0]), dados[1]));
+                
+                line = bufferMesas.readLine();
                 
             }
-        };
+            
+        } catch (IOException ex) {
+            
+            Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
         return mesas;
     }
     
     public static List<Produto> getSampleProduto() {
-        List<Produto> produtos = new ArrayList<Produto>() {
-            {
-                add(new Produto("Prato 1", "Descrição do prato 1",10.50f,1));
-                add(new Produto("Prato 2", "Descrição do prato 2",5f,2));
-                add(new Produto("Prato 3", "Descrição do prato 3",2.50f,3));
+        
+        List<Produto> produtos = new ArrayList<Produto>();
+        
+        try {
+            
+            
+            BufferedReader bufferProdutos= null;
+            
+            bufferProdutos = new BufferedReader(new FileReader("produtos.txt"));
+            
+            String line = bufferProdutos.readLine();
+                
+            while (line != null) {
+
+                String[] dados = line.split("\t");
+                
+                produtos.add(new Produto(Integer.parseInt(dados[0]), dados[1], Float.parseFloat(dados[2])));
+
+                line = bufferProdutos.readLine();
+
             }
-        };
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TrabLab3.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return produtos;
     }
 }

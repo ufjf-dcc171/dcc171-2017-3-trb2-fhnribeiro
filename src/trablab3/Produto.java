@@ -23,9 +23,8 @@ public class Produto {
     }
     protected int id;
 
-    public Produto(String nome, String descricao,float preco,int id) {
+    public Produto(int id,String nome,float preco) {
         this.nome = nome;
-        this.descricao = descricao;
         this.preco=preco;
         this.id=id;
         

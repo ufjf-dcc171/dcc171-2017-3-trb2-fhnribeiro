@@ -32,6 +32,18 @@ public class Mesa {
         
         Mesa.mesasId=Mesa.mesasId+1;
     }
+    
+    public Mesa(int id,String descricao) {
+        
+        this.descricao = descricao;
+        
+        pedidos = new ArrayList<>();
+        
+        this.id=id;
+        if(id>Mesa.mesasId){
+            Mesa.mesasId=id+1;
+        }
+    }
 
     public Mesa(List<Pedido> pedidos, String descricao) {
         
